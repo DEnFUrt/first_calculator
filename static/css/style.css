@@ -33,7 +33,7 @@ li {
     border: none;
     text-align: right;
     font-size: 40px;
-    width: 250px;
+    width: 300px;
     color: #000000d8;
 }
 
@@ -42,7 +42,7 @@ li {
     /* float: left; */
     border: none;
     font-size: 14px;
-    width: 250px;
+    width: 300px;
 }
 
 .calculator__result {
