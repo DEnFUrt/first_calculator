@@ -3,6 +3,7 @@
     const btnResult = document.getElementById('btnResult');
     const btnPercent = document.getElementById('btnPercent');
     const btnEsc = document.getElementById('btnEsc');
+    const btnChangeValue = document.getElementById('btnChangeValue');
     const inputFirstValue = document.getElementById('firstValue');
     const inputSecondValue = document.getElementById('secondValue');
     const fieldResult = document.getElementById('result');
@@ -11,6 +12,7 @@
     let firstValue = 0;
     let secondValue = 0;
     let action = '+';
+    
 
     //Чистим строку ввода и переменную с ней связанную при клике мышкой
     inputFirstValue.addEventListener('click', (e) => {  
@@ -25,7 +27,21 @@
     });
 
     inputFirstValue.addEventListener('input', (e) => {
-        if (e.currentTarget.value.length === 0 || (!Number(e.currentTarget.value) && e.currentTarget.value !== '0')) {
+        if (e.currentTarget.value.length === 0 
+            || (!Number(e.currentTarget.value) 
+            && e.currentTarget.value !== '0' 
+            && e.currentTarget.value !== '-')) {
+            firstValue = 0;
+            e.currentTarget.value = 'не число!';
+        } else {
+            firstValue = parseFloat(e.currentTarget.value);
+        }
+    });
+
+    inputFirstValue.addEventListener('change', (e) => {
+        if (e.currentTarget.value.length === 0 
+            || (!Number(e.currentTarget.value) 
+            && e.currentTarget.value !== '0')) {
             firstValue = 0;
             e.currentTarget.value = 'не число!';
         } else {
@@ -34,7 +50,21 @@
     });
 
     inputSecondValue.addEventListener('input', (e) => {
-        if (e.currentTarget.value.length === 0 || (!Number(e.currentTarget.value) && e.currentTarget.value !== '0')) {
+        if (e.currentTarget.value.length === 0 
+            || (!Number(e.currentTarget.value) 
+            && e.currentTarget.value !== '0'
+            && e.currentTarget.value !== '-')) {
+            secondValue = 0;
+            e.currentTarget.value = 'не число!';
+        } else {
+            secondValue = parseFloat(e.currentTarget.value);
+        }
+    });
+
+    inputSecondValue.addEventListener('change', (e) => {
+        if (e.currentTarget.value.length === 0 
+            || (!Number(e.currentTarget.value) 
+            && e.currentTarget.value !== '0')) {
             secondValue = 0;
             e.currentTarget.value = 'не число!';
         } else {
@@ -50,8 +80,16 @@
     });
 
     btnEsc.addEventListener('click', () => {
-        console.log(firstValue, secondValue, action);
+        //console.log(firstValue, secondValue, action);
         clearValue();
+    });
+
+    btnChangeValue.addEventListener('click', () => {
+        if (fieldResult.textContent[0] === '-') {
+            fieldResult.textContent = fieldResult.textContent.replace('-', '');
+        } else {
+            fieldResult.textContent = `-${fieldResult.textContent}`;
+        }
     });
 
     for (let i = 0; i < controls.length; i++) {
@@ -62,7 +100,10 @@
     }
 
     //Чистим строки ввода и переменные
-    function clearValue() { 
+    function clearValue(clearResult) { 
+        if (clearResult) {
+            fieldResult.innerHTML = '0';
+        }
         inputFirstValue.value = '';
         firstValue = 0;
         inputSecondValue.value = '';
