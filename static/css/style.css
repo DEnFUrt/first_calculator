@@ -1,0 +1,89 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+ul,
+li {
+    display: block;
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    list-style-type: none;
+}
+
+.calculator {
+    display: flex;
+    align-items: center;
+    margin: auto;
+    width: 400px;
+}
+
+.calculator form {
+    margin-right: 10px;
+}
+
+.calculator__inputs {
+    margin-bottom: 20px;
+}
+
+.calculator__inputs input {
+    border: none;
+    text-align: right;
+    font-size: 40px;
+    width: 250px;
+    color: #000000d8;
+}
+
+.calculator__inputs .calculator__inputs-operand label {
+    text-align: right; /* Выравниваем по правому краю */
+    float: left; /* Выстраиваем элементы рядом */
+    border: none;
+    font-size: 14px;
+    width: 250px;
+}
+
+.calculator__result {
+    font-size: 40px;
+    text-align: right;
+    padding-top: 10px;
+    border-top: 3px solid rgb(189, 189, 189);
+}
+
+.calculator__keyboard {}
+
+.row {
+    display: flex;
+}
+
+.row button {
+    height: 60px;
+    width: 60px;
+    font-size: 40px;
+    border: none;
+    border-radius: 5px;
+    margin: 5px;
+    color: rgb(146, 146, 146);
+    outline: none;
+    cursor: pointer;
+    transition: all .3s;
+}
+
+.row button:hover {
+    transition: all .3s;
+    color: rgb(41, 41, 41);
+}
+
+.row-result button {
+    /* width: 100%; */
+}
+
+.row-result .btnResult {
+    width: 65%;
+}
+
+.row .btn-esc {
+    color: rgba(117, 11, 11, 0.438);
+}
