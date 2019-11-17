@@ -37,9 +37,9 @@ li {
     color: #000000d8;
 }
 
-.calculator__inputs .calculator__inputs-operand label {
+.calculator__inputs .calculator__inputs-operand {
     text-align: right; /* Выравниваем по правому краю */
-    float: left; /* Выстраиваем элементы рядом */
+    /* float: left; */
     border: none;
     font-size: 14px;
     width: 250px;
