@@ -76,6 +76,11 @@ li {
     color: rgb(41, 41, 41);
 }
 
+.row button:focus {
+    transition: all .3s;
+    color: rgb(41, 41, 41);
+}
+
 .row-result .btnResult {
     /* width: 65%; */
 }

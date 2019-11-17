@@ -12,6 +12,8 @@
     let firstValue = 0;
     let secondValue = 0;
     let action = '+';
+
+    setFocus();
     
 
     //Чистим строку ввода и переменную с ней связанную при клике мышкой
@@ -26,38 +28,15 @@
         secondValue = 0;
     });
 
-    inputFirstValue.addEventListener('input', (e) => {
-        if (e.currentTarget.value.length === 0 
-            || (!Number(e.currentTarget.value) 
-            && e.currentTarget.value !== '0' 
-            && e.currentTarget.value !== '-')) {
-            firstValue = 0;
-            e.currentTarget.value = 'не число!';
-        } else {
-            firstValue = parseFloat(e.currentTarget.value);
-        }
-    });
-
     inputFirstValue.addEventListener('change', (e) => {
         if (e.currentTarget.value.length === 0 
             || (!Number(e.currentTarget.value) 
             && e.currentTarget.value !== '0')) {
+            // && e.currentTarget.value !== '-')) {
             firstValue = 0;
             e.currentTarget.value = 'не число!';
         } else {
             firstValue = parseFloat(e.currentTarget.value);
-        }
-    });
-
-    inputSecondValue.addEventListener('input', (e) => {
-        if (e.currentTarget.value.length === 0 
-            || (!Number(e.currentTarget.value) 
-            && e.currentTarget.value !== '0'
-            && e.currentTarget.value !== '-')) {
-            secondValue = 0;
-            e.currentTarget.value = 'не число!';
-        } else {
-            secondValue = parseFloat(e.currentTarget.value);
         }
     });
 
@@ -77,11 +56,13 @@
 
         fieldResult.innerHTML = calculate(firstValue, secondValue, action);
         clearValue();
+        setFocus();
     });
 
     btnEsc.addEventListener('click', () => {
-        //console.log(firstValue, secondValue, action);
-        clearValue();
+        let clearResult = true;
+        clearValue(clearResult);
+        setFocus();
     });
 
     btnChangeValue.addEventListener('click', () => {
@@ -97,6 +78,10 @@
         btn.addEventListener('click', (e) => {
             action = e.currentTarget.innerHTML;
         });
+    }
+
+    function setFocus () {
+        inputFirstValue.focus();
     }
 
     //Чистим строки ввода и переменные

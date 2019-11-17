@@ -14,30 +14,30 @@
         <form>
             <div class="calculator__inputs">
                 <div>
-                    <input type="text" id="firstValue" placeholder="0">
+                    <input type="text" id="firstValue" placeholder="0" tabindex="1">
                 </div>
                 <div class="calculator__inputs-operand" id="operand">.</div>
                 <div>
-                    <input type="text" id="secondValue" placeholder="0">
+                    <input type="text" id="secondValue" placeholder="0" tabindex="2">
                 </div>
             </div>
             <div id="result" class="calculator__result">0</div>
         </form>
         <div class="calculator__keyboard">
             <div class="row">
-                <button class="btn">+</button>
-                <button class="btn">-</button>
-                <button class="btn-esc" id="btnEsc">C</button>
+                <button class="btn" tabindex="3">+</button>
+                <button class="btn" tabindex="4">-</button>
+                <button class="btn-esc" id="btnEsc" tabindex="8">C</button>
             </div>
             <div class="row">
-                <button class="btn">*</button>
-                <button class="btn">/</button>
-                <button class="btn btnPercent" id="btnPercent">%</button>
+                <button class="btn" tabindex="5">*</button>
+                <button class="btn" tabindex="6">/</button>
+                <button class="btn btnPercent" id="btnPercent" tabindex="9">%</button>
             </div>
             <div class="row row-result">
-                <button class="btnResult" id="btnResult">=</button>
-                <button class="btnUpResult" id="btnUpResult" title="Использовать результат. При нажатии на кнопку результат копируется в первую пустую строку.">&#11014;</button>
-                <button class="btnChangeValue" id="btnChangeValue" title="Инверсия знака числа для результата вычисления">-/+</button>
+                <button class="btnResult" id="btnResult" tabindex="7">=</button>
+                <button class="btnUpResult" id="btnUpResult" title="Использовать результат. При нажатии на кнопку результат копируется в первую пустую строку." tabindex="11">&#11014;</button>
+                <button class="btnChangeValue" id="btnChangeValue" title="Инверсия числа для результата вычисления" tabindex="10">-/+</button>
             </div>
         </div>
     </div>
