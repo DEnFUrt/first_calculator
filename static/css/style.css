@@ -76,14 +76,14 @@ li {
     color: rgb(41, 41, 41);
 }
 
-.row-result button {
-    /* width: 100%; */
-}
-
 .row-result .btnResult {
     width: 65%;
 }
 
 .row .btn-esc {
     color: rgba(117, 11, 11, 0.438);
+}
+
+.row .btn-esc:hover {
+    color: rgba(117, 11, 11, 0.767);
 }
