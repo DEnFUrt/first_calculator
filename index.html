@@ -11,14 +11,15 @@
 
 <body>
     <div class="calculator">
-        <form>
+        
+        <form id="calculatorForm">
             <div class="calculator__inputs">
                 <div>
-                    <input type="text" id="firstValue" placeholder="0" tabindex="1">
+                    <input type="text" id="firstValue" placeholder="0" tabindex="1" autocomplete="off">
                 </div>
-                <div class="calculator__inputs-operand" id="operand">.</div>
+                <div class="calculator__inputs-operand" id="operand">.+-%</div>
                 <div>
-                    <input type="text" id="secondValue" placeholder="0" tabindex="2">
+                    <input type="text" id="secondValue" placeholder="0" tabindex="2" autocomplete="off">
                 </div>
             </div>
             <div id="result" class="calculator__result">0</div>

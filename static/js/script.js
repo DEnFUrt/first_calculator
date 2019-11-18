@@ -82,6 +82,8 @@
         }
     });
 
+    
+
     btnUpResult.addEventListener('click', () => {
         if (inputFirstValue.value === '' || inputFirstValue.value === '0') {
             inputFirstValue.value = fieldResult.textContent;
@@ -92,7 +94,7 @@
         }
     });
 
-    //Ставим фокус ввода на первую строку
+    //Ставим фокус ввода на первую строку, если там не число то чистим строку ввода
     function setFocus () {
         if (inputFirstValue.value === 'не число!') {
             inputFirstValue.value = '';
@@ -100,7 +102,7 @@
         inputFirstValue.focus();
     }
 
-    //Чистим строки ввода и переменные
+    //Чистим строки ввода и переменные и экшен
     function clearValue(clearResult) { 
         if (clearResult) {
             fieldResult.innerHTML = '0';
