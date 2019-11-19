@@ -1,7 +1,6 @@
 (function () {
     const controls = document.getElementsByClassName('btn');
     const btnResult = document.getElementById('btnResult');
-    const btnPercent = document.getElementById('btnPercent');
     const btnEsc = document.getElementById('btnEsc');
     const btnChangeValue = document.getElementById('btnChangeValue');
     const btnUpResult = document.getElementById('btnUpResult');
@@ -17,24 +16,27 @@
     setFocus();
     
 
-    //Чистим строку ввода и переменную с ней связанную при клике мышкой
+    //Чистим первую строку ввода и обнуляем переменную с ней связанную при клике мышкой
+
     inputFirstValue.addEventListener('click', (e) => {  
         e.currentTarget.value = '';
         firstValue = 0;
     });
 
-    //Чистим строку ввода и переменную с ней связанную при клике мышкой
+    //Чистим вторую строку ввода и обнуляем переменную с ней связанную при клике мышкой
+
     inputSecondValue.addEventListener('click', (e) => { 
         e.currentTarget.value = '';
         secondValue = 0;
     });
 
-    //проверяем строку ввода первого оператора после потери фокуса ввода, если не число, то сбрасываем значение на 0
+    /* проверяем строку ввода первого оператора после потери фокуса ввода, если не число, то сбрасываем значение на 0
+    и выводим соответствующее сообщение */
+
     inputFirstValue.addEventListener('change', (e) => {
         if (e.currentTarget.value.length === 0 
             || (!Number(e.currentTarget.value) 
             && e.currentTarget.value !== '0')) {
-            // && e.currentTarget.value !== '-')) {
             firstValue = 0;
             e.currentTarget.value = 'не число!';
         } else {
@@ -42,7 +44,9 @@
         }
     });
 
-    ////проверяем строку ввода второго оператора после потери фокуса ввода, если не число, то сбрасываем значение на 0
+    /* проверяем строку ввода второго оператора после потери фокуса ввода, если не число, то сбрасываем значение на 0
+    и выводим соответствующее сообщение */
+
     inputSecondValue.addEventListener('change', (e) => {
         if (e.currentTarget.value.length === 0 
             || (!Number(e.currentTarget.value) 
@@ -55,6 +59,7 @@
     });
 
     //Считаем результат, вызываем функцию чистки строк ввода оператора, передаем фокус на первую строку ввода
+
     btnResult.addEventListener('click', () => {
         console.log(firstValue, secondValue, action);
         if (inputFirstValue.value !== 'не число!' && inputSecondValue.value !== 'не число!') {
@@ -67,14 +72,18 @@
     });
 
     //Если нажали кнопку С вызываем функцию чистки строки ввода и результата
+    
     btnEsc.addEventListener('click', () => {
         let clearResult = true;
         clearValue(clearResult);
         setFocus();
     });
 
-    //Если нажата кнопка -/+ меняем знак результата
+    /* Если нажата кнопка -/+ меняем знак результата
+    Если в строке результата не число, выходим из функции */
+
     btnChangeValue.addEventListener('click', () => {
+        if (!Number(fieldResult.textContent)) {return};
         if (fieldResult.textContent[0] === '-') {
             fieldResult.textContent = fieldResult.textContent.replace('-', '');
         } else {
@@ -83,8 +92,12 @@
     });
 
     
+    /* Если нажата кнопка стрелка вверх, то переносим результ вычисления в первую пустую строку
+    или во вторую если первая занята и присваиваем результат сответствующей переменной. Если строки заняты - ничего не переносим 
+    Если в строке результат не число, выходим из функции  */
 
     btnUpResult.addEventListener('click', () => {
+        if (!Number(fieldResult.textContent)) {return};
         if (inputFirstValue.value === '' || inputFirstValue.value === '0') {
             inputFirstValue.value = fieldResult.textContent;
             firstValue = parseFloat(fieldResult.textContent);
@@ -95,6 +108,7 @@
     });
 
     //Ставим фокус ввода на первую строку, если там не число то чистим строку ввода
+
     function setFocus () {
         if (inputFirstValue.value === 'не число!') {
             inputFirstValue.value = '';
@@ -103,9 +117,10 @@
     }
 
     //Чистим строки ввода и переменные и экшен
+
     function clearValue(clearResult) { 
         if (clearResult) {
-            fieldResult.innerHTML = '0';
+            fieldResult.textContent = '0';
         }
         inputFirstValue.value = '';
         firstValue = 0;
@@ -115,10 +130,11 @@
     }
 
     //Определяем какая кнопка операнда была нажата
+
     for (let i = 0; i < controls.length; i++) {
         const btn = controls[i];
         btn.addEventListener('click', (e) => {
-            action = e.currentTarget.innerHTML;
+            action = e.currentTarget.textContent;
         });
     }
 
@@ -135,7 +151,14 @@
 
             case '/':
                 if (y !== 0) {
-                    return x / y;
+                    let result = x / y;
+                    return +result.toFixed(9);
+                }
+                return 'бесконечность';
+            case '%': 
+                if (x !== 0) {
+                let result = y * 100 / x;
+                return +result.toFixed(9);
                 }
                 return 'бесконечность';
             default:
@@ -144,7 +167,6 @@
     }
 })();
 
-// добавить кнопку % в обший класс btn и обрабатвать при нажатии равно
-// привязать нажатие кнопки ентер к равно а ескейп на С
-// поигаться со стилями и заголовком
-// добавить проверку при переносе результата и инверсии значения, чтобы не переносилось слово бесконечность и нет операнда
+
+// привязать нажатие кнопки ентер к = а ескейп на С
+
