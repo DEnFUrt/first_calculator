@@ -13,23 +13,33 @@
     const errNumber = 'не число!';
     const errOperand = 'нет операнда!';
 
+    const operandSimbol = {
+        '+': '➕',
+        '-': '➖',
+        '*': '✖',
+        '/': '➗',
+        '%': '％',
+    }
+
     let firstValue = 0;
     let secondValue = 0;
     let action = '';
 
-    setFocus();
-    
+    //При загрузке страницы вызываем функцию и ставим фокус на первую строку ввода
+
+    setFocusInputFirstValue();
+
 
     //Чистим первую строку ввода и обнуляем переменную с ней связанную при клике мышкой
 
-    inputFirstValue.addEventListener('click', (e) => {  
+    inputFirstValue.addEventListener('click', (e) => {
         e.currentTarget.value = '';
         firstValue = 0;
     });
 
     //Чистим вторую строку ввода и обнуляем переменную с ней связанную при клике мышкой
 
-    inputSecondValue.addEventListener('click', (e) => { 
+    inputSecondValue.addEventListener('click', (e) => {
         e.currentTarget.value = '';
         secondValue = 0;
     });
@@ -38,9 +48,9 @@
     и выводим соответствующее сообщение */
 
     inputFirstValue.addEventListener('change', (e) => {
-        if (e.currentTarget.value.length === 0 
-            || (!Number(e.currentTarget.value) 
-            && e.currentTarget.value !== '0')) {
+        if (e.currentTarget.value.length === 0 ||
+            (!Number(e.currentTarget.value) &&
+                e.currentTarget.value !== '0')) {
             firstValue = 0;
             e.currentTarget.value = errNumber;
         } else {
@@ -52,9 +62,9 @@
     и выводим соответствующее сообщение */
 
     inputSecondValue.addEventListener('change', (e) => {
-        if (e.currentTarget.value.length === 0 
-            || (!Number(e.currentTarget.value) 
-            && e.currentTarget.value !== '0')) {
+        if (e.currentTarget.value.length === 0 ||
+            (!Number(e.currentTarget.value) &&
+                e.currentTarget.value !== '0')) {
             secondValue = 0;
             e.currentTarget.value = errNumber;
         } else {
@@ -72,22 +82,42 @@
                 clearValue();
             }
         }
-        setFocus();
+        setFocusInputFirstValue();
     });
 
-        //Если нажали кнопку С вызываем функцию чистки строки ввода и результата
-    
+    /* // Функция парсит нажатие кнопки ентер и вызывает событие для кнопки равно bntResult 
+
+    window.addEventListener('keydown', (e) => {
+        e.preventDefault();
+        if (e.keyCode === 13) {
+            btnResult.click();
+        }
+    });
+
+    // Функция парсит нажатие кнопки esc и вызывает событие для кнопки C btnEsc 
+
+    window.addEventListener('keydown', (e) => {
+        e.preventDefault();
+        if (e.keyCode === 27) {
+            btnEsc.click();
+        }
+    }); */
+
+    //Если нажали кнопку С вызываем функцию чистки строки ввода и результата
+
     btnEsc.addEventListener('click', () => {
         let clearResult = true;
         clearValue(clearResult);
-        setFocus();
+        setFocusInputFirstValue();
     });
 
     /* Если нажата кнопка -/+ меняем знак результата
     Если в строке результата не число, выходим из функции */
 
     btnChangeValue.addEventListener('click', () => {
-        if (!Number(fieldResult.textContent)) {return};
+        if (!Number(fieldResult.textContent)) {
+            return
+        };
         if (fieldResult.textContent[0] === '-') {
             fieldResult.textContent = fieldResult.textContent.replace('-', '');
         } else {
@@ -95,13 +125,15 @@
         }
     });
 
-    
+
     /* Если нажата кнопка стрелка вверх, то переносим результ вычисления в первую пустую строку
     или во вторую если первая занята и присваиваем результат сответствующей переменной. Если строки заняты - ничего не переносим 
     Если в строке результат не число, выходим из функции  */
 
     btnUpResult.addEventListener('click', () => {
-        if (!Number(fieldResult.textContent)) {return};
+        if (!Number(fieldResult.textContent)) {
+            return
+        };
         if (inputFirstValue.value === '' || inputFirstValue.value === '0') {
             inputFirstValue.value = fieldResult.textContent;
             firstValue = parseFloat(fieldResult.textContent);
@@ -113,7 +145,7 @@
 
     //Ставим фокус ввода на первую строку, если там не число то чистим строку ввода
 
-    function setFocus () {
+    function setFocusInputFirstValue() {
         if (inputFirstValue.value === errNumber) {
             inputFirstValue.value = '';
         }
@@ -122,7 +154,7 @@
 
     //Чистим строки ввода и переменные и экшен
 
-    function clearValue(clearResult) { 
+    function clearValue(clearResult) {
         if (clearResult) {
             fieldResult.textContent = '0';
         }
@@ -134,33 +166,18 @@
         action = '';
     }
 
-    //Определяем какая кнопка операнда была нажата
+    //Определяем какая кнопка операнда была нажата и выводим символ операнда в форму
 
     for (let i = 0; i < controls.length; i++) {
         const btn = controls[i];
         btn.addEventListener('click', (e) => {
             action = e.currentTarget.textContent;
-            switch (action) {
-                case '+': 
-                    txtOperand.textContent = '➕';
+            for (let key in operandSimbol) {
+                if (key === action) {
+                    txtOperand.textContent = operandSimbol[key];
                     break;
-
-                case '-': 
-                    txtOperand.textContent = '➖';
-                    break;
-
-                case '*':
-                    txtOperand.textContent = '✖';
-                    break;
-
-                case '/': 
-                    txtOperand.textContent = '➗';
-                    break;
-
-                case '%': 
-                    txtOperand.textContent = '％';
-                    break;
-            } 
+                }
+            }
         });
     }
 
@@ -172,10 +189,10 @@
             case '-':
                 return x - y;
 
-            case '*': 
-                let result = x* y;
+            case '*':
+                let result = x * y;
                 return +result.toFixed(6);
-            
+
             case '/':
                 if (y !== 0) {
                     let result = x / y;
@@ -183,10 +200,10 @@
                 }
                 return errInfiniti;
 
-            case '%': 
+            case '%':
                 if (x !== 0) {
-                let result = y * 100 / x;
-                return +result.toFixed(6);
+                    let result = y * 100 / x;
+                    return +result.toFixed(6);
                 }
                 return errInfiniti;
 
@@ -198,4 +215,3 @@
 
 
 // привязать нажатие кнопки ентер к = а ескейп на С
-
