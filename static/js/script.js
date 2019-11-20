@@ -85,10 +85,10 @@
         setFocusInputFirstValue();
     });
 
-    /* // Функция парсит нажатие кнопки ентер и вызывает событие для кнопки равно bntResult 
+    // Функция парсит нажатие кнопки ентер и вызывает событие для кнопки равно bntResult 
 
     window.addEventListener('keydown', (e) => {
-        e.preventDefault();
+        // e.preventDefault();
         if (e.keyCode === 13) {
             btnResult.click();
         }
@@ -97,11 +97,11 @@
     // Функция парсит нажатие кнопки esc и вызывает событие для кнопки C btnEsc 
 
     window.addEventListener('keydown', (e) => {
-        e.preventDefault();
+        // e.preventDefault();
         if (e.keyCode === 27) {
             btnEsc.click();
         }
-    }); */
+    });
 
     //Если нажали кнопку С вызываем функцию чистки строки ввода и результата
 
