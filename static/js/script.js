@@ -9,6 +9,10 @@
     const fieldResult = document.getElementById('result');
     const txtOperand = document.getElementById('operand');
 
+    const errInfiniti = 'бесконечность';
+    const errNumber = 'не число!';
+    const errOperand = 'нет операнда!';
+
     let firstValue = 0;
     let secondValue = 0;
     let action = '';
@@ -38,7 +42,7 @@
             || (!Number(e.currentTarget.value) 
             && e.currentTarget.value !== '0')) {
             firstValue = 0;
-            e.currentTarget.value = 'не число!';
+            e.currentTarget.value = errNumber;
         } else {
             firstValue = parseFloat(e.currentTarget.value);
         }
@@ -52,7 +56,7 @@
             || (!Number(e.currentTarget.value) 
             && e.currentTarget.value !== '0')) {
             secondValue = 0;
-            e.currentTarget.value = 'не число!';
+            e.currentTarget.value = errNumber;
         } else {
             secondValue = parseFloat(e.currentTarget.value);
         }
@@ -62,16 +66,16 @@
 
     btnResult.addEventListener('click', () => {
         console.log(firstValue, secondValue, action);
-        if (inputFirstValue.value !== 'не число!' && inputSecondValue.value !== 'не число!') {
-            fieldResult.innerHTML = calculate(firstValue, secondValue, action);
-            if (fieldResult.textContent !== 'нет операнда!') {
+        if (inputFirstValue.value !== errNumber && inputSecondValue.value !== errNumber) {
+            fieldResult.textContent = calculate(firstValue, secondValue, action);
+            if (fieldResult.textContent !== errOperand) {
                 clearValue();
             }
         }
         setFocus();
     });
 
-    //Если нажали кнопку С вызываем функцию чистки строки ввода и результата
+        //Если нажали кнопку С вызываем функцию чистки строки ввода и результата
     
     btnEsc.addEventListener('click', () => {
         let clearResult = true;
@@ -110,7 +114,7 @@
     //Ставим фокус ввода на первую строку, если там не число то чистим строку ввода
 
     function setFocus () {
-        if (inputFirstValue.value === 'не число!') {
+        if (inputFirstValue.value === errNumber) {
             inputFirstValue.value = '';
         }
         inputFirstValue.focus();
@@ -126,6 +130,7 @@
         firstValue = 0;
         inputSecondValue.value = '';
         secondValue = 0;
+        txtOperand.textContent = '';
         action = '';
     }
 
@@ -135,6 +140,27 @@
         const btn = controls[i];
         btn.addEventListener('click', (e) => {
             action = e.currentTarget.textContent;
+            switch (action) {
+                case '+': 
+                    txtOperand.textContent = '➕';
+                    break;
+
+                case '-': 
+                    txtOperand.textContent = '➖';
+                    break;
+
+                case '*':
+                    txtOperand.textContent = '✖';
+                    break;
+
+                case '/': 
+                    txtOperand.textContent = '➗';
+                    break;
+
+                case '%': 
+                    txtOperand.textContent = '％';
+                    break;
+            } 
         });
     }
 
@@ -146,23 +172,26 @@
             case '-':
                 return x - y;
 
-            case '*':
-                return x * y;
-
+            case '*': 
+                let result = x* y;
+                return +result.toFixed(6);
+            
             case '/':
                 if (y !== 0) {
                     let result = x / y;
-                    return +result.toFixed(9);
+                    return +result.toFixed(6);
                 }
-                return 'бесконечность';
+                return errInfiniti;
+
             case '%': 
                 if (x !== 0) {
                 let result = y * 100 / x;
-                return +result.toFixed(9);
+                return +result.toFixed(6);
                 }
-                return 'бесконечность';
+                return errInfiniti;
+
             default:
-                return 'нет операнда!';
+                return errOperand;
         }
     }
 })();
