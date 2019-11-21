@@ -14,7 +14,7 @@
     <div>
         <h1>ツ Калькулятор JS</h1>
     </div>
-    <div class="calculator">
+    <div class="calculator" id="calculator">
         <form id="calculatorForm">
             <div class="calculator__inputs">
                 <div>
@@ -31,7 +31,7 @@
             <div class="row">
                 <button class="btn" tabindex="3">+</button>
                 <button class="btn" tabindex="4">-</button>
-                <button class="btn-esc" id="btnEsc" tabindex="8" title="Очистить всё">C</button>
+                <button class="btn btn-esc" id="btnEsc" tabindex="8" title="Очистить всё">C</button>
             </div>
             <div class="row">
                 <button class="btn" tabindex="5">*</button>
@@ -43,9 +43,12 @@
                 <button class="btnResult" id="btnResult" tabindex="7">=</button>
                 <button class="btnUpResult" id="btnUpResult"
                     title="Использовать результат. Результат копируется в первую пустую строку, если строки заполнены - значение не переносится."
-                    tabindex="11">&#11014;</button>
+                    tabindex="11">&#10548; 
+                    <!-- &#11014; -->
+                </button>
                 <button class="btnChangeValue" id="btnChangeValue" title="Инверсия числа для результата вычисления"
-                    tabindex="10">±</button>
+                    tabindex="10">±
+                </button>
             </div>
         </div>
     </div>

@@ -8,17 +8,33 @@
     const inputSecondValue = document.getElementById('secondValue');
     const fieldResult = document.getElementById('result');
     const txtOperand = document.getElementById('operand');
+    const calculator = document.getElementById('calculator');
 
+    const controlsArray = [... controls];
+
+    
+    //Константы сообщений об ошибках
     const errInfiniti = 'бесконечность';
     const errNumber = 'не число!';
     const errOperand = 'нет операнда!';
 
+    //Библиотека соответствия кодов клавиатуры тексту на клавишах калькулятора 
+    const keyCodes = {
+        'Enter' : '=',
+        'Escape' : 'C',
+        '+' : '+',
+        '/' : '/',
+        '*' : '*',
+        '-' : '-',
+    }
+
+    //Библиотека эмодзи для операндов
     const operandSimbol = {
-        '+': '➕',
-        '-': '➖',
+        '+': '✚',
+        '-': '▬',
         '*': '✖',
-        '/': '➗',
-        '%': '％',
+        '/': '/',
+        '%': '%',
     }
 
     let firstValue = 0;
@@ -85,23 +101,32 @@
         setFocusInputFirstValue();
     });
 
-    // Функция парсит нажатие кнопки ентер и вызывает событие для кнопки равно bntResult 
+     
 
-    window.addEventListener('keydown', (e) => {
-        // e.preventDefault();
-        if (e.keyCode === 13) {
-            btnResult.click();
+       // Функция парсит нажатие кнопки на клаиатуре и вызывает событие для кнопки на форме 
+
+    calculator.addEventListener('keydown', (e) => {
+        for (let keyCode in keyCodes) {
+            if (e.key === keyCode) {
+                let x = controlsArray.find(x => x.textContent === keyCodes[keyCode]);
+                
+                x.focus();
+           } 
         }
     });
 
-    // Функция парсит нажатие кнопки esc и вызывает событие для кнопки C btnEsc 
-
-    window.addEventListener('keydown', (e) => {
-        // e.preventDefault();
-        if (e.keyCode === 27) {
-            btnEsc.click();
+    calculator.addEventListener('keyup', (e) => {
+        for (let keyCode in keyCodes) {
+            if (e.key === keyCode) {
+                let x = controlsArray.find(x => x.textContent === keyCodes[keyCode]);
+                
+                x.click();
+           } 
         }
-    });
+    });   
+
+    
+
 
     //Если нажали кнопку С вызываем функцию чистки строки ввода и результата
 
