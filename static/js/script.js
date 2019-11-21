@@ -10,9 +10,9 @@
     const txtOperand = document.getElementById('operand');
     const calculator = document.getElementById('calculator');
 
-    const controlsArray = [... controls];
+    const controlsArray = [...controls];
 
-    
+
     //Константы сообщений об ошибках
     const errInfiniti = 'бесконечность';
     const errNumber = 'не число!';
@@ -20,12 +20,12 @@
 
     //Библиотека соответствия кодов клавиатуры тексту на клавишах калькулятора 
     const keyCodes = {
-        'Enter' : '=',
-        'Escape' : 'C',
-        '+' : '+',
-        '/' : '/',
-        '*' : '*',
-        '-' : '-',
+        'Enter': '=',
+        'Escape': 'C',
+        '+': '+',
+        '/': '/',
+        '*': '*',
+        '-': '-',
     }
 
     //Библиотека эмодзи для операндов
@@ -43,7 +43,7 @@
 
     //При загрузке страницы вызываем функцию и ставим фокус на первую строку ввода
 
-    setFocusInputFirstValue();
+    setFocusInput(inputFirstValue);
 
 
     //Чистим первую строку ввода и обнуляем переменную с ней связанную при клике мышкой
@@ -91,6 +91,7 @@
     //Считаем результат, вызываем функцию чистки строк ввода оператора, передаем фокус на первую строку ввода
 
     btnResult.addEventListener('click', () => {
+        console.log(`onResult ${btnUpResult}`)
         console.log(firstValue, secondValue, action);
         if (inputFirstValue.value !== errNumber && inputSecondValue.value !== errNumber) {
             fieldResult.textContent = calculate(firstValue, secondValue, action);
@@ -98,15 +99,16 @@
                 clearValue();
             }
         }
-        setFocusInputFirstValue();
+        setFocusInput(inputFirstValue);
     });
 
     //Если нажали кнопку С вызываем функцию чистки строки ввода и результата
 
     btnEsc.addEventListener('click', () => {
+        console.log(`onClear ${btnEsc}`)
         let clearResult = true;
         clearValue(clearResult);
-        setFocusInputFirstValue();
+        setFocusInput(inputFirstValue);
     });
 
     /* Если нажата кнопка -/+ меняем знак результата
@@ -143,11 +145,11 @@
 
     //Ставим фокус ввода на первую строку, если там не число то чистим строку ввода
 
-    function setFocusInputFirstValue() {
-        if (inputFirstValue.value === errNumber) {
-            inputFirstValue.value = '';
+    function setFocusInput(nameInput) {
+        if (nameInput.value === errNumber) {
+            nameInput.value = '';
         }
-        inputFirstValue.focus();
+        nameInput.focus();
     }
 
     //Чистим строки ввода и переменные и экшен
@@ -169,39 +171,47 @@
     for (let i = 0; i < controls.length; i++) {
         const btn = controls[i];
         btn.addEventListener('click', (e) => {
-            action = e.currentTarget.textContent;
             for (let key in operandSimbol) {
-                if (key === action) {
+                if (key === e.currentTarget.textContent) {
+                    action = key;
                     txtOperand.textContent = operandSimbol[key];
                     break;
                 }
             }
         });
+       // setFocusInput(inputSecondValue);
     }
 
-       // Функция парсит нажатие кнопки на клаиатуре и вызывает событие для кнопки на форме 
+    // Функция парсит нажатие кнопки на клавиатуре и вызывает событие для кнопки на форме 
 
-       calculator.addEventListener('keydown', (e) => {
+    calculator.addEventListener('keydown', (e) => {
+        console.log(`keyDown ${e.key}`)
         for (let keyCode in keyCodes) {
             if (e.key === keyCode) {
                 let x = controlsArray.find(x => x.textContent === keyCodes[keyCode]);
-                if (x) {x.focus()}
+                if (x) {
+                    x.focus()
+                }
                 break;
                 
-           } 
+            }
         }
+        
     });
 
     calculator.addEventListener('keyup', (e) => {
+        console.log(`keyUp ${e}`)
         for (let keyCode in keyCodes) {
             if (e.key === keyCode) {
                 let x = controlsArray.find(x => x.textContent === keyCodes[keyCode]);
-                if (x) {x.click()}
+                if (x) {
+                    x.click()
+                    setFocusInput(inputSecondValue);
+                }
                 break;
-                
-           } 
+            }
         }
-    });   
+    });
 
     function calculate(x, y, action) {
         switch (action) {

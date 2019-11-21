@@ -15,7 +15,7 @@
         <h1>ツ Калькулятор JS</h1>
     </div>
     <div class="calculator" id="calculator">
-        <form id="calculatorForm">
+        <form onkeydown="if(event.keyCode==13){return false;}">
             <div class="calculator__inputs">
                 <div>
                     <input type="text" id="firstValue" placeholder="0" tabindex="1" autocomplete="off">
@@ -29,25 +29,25 @@
         </form>
         <div class="calculator__keyboard">
             <div class="row">
-                <button class="btn" tabindex="3">+</button>
-                <button class="btn" tabindex="4">-</button>
-                <button class="btn btn-esc" id="btnEsc" tabindex="8" title="Очистить всё">C</button>
+                <button type="button" class="btn" tabindex="3">+</button>
+                <button type="button" class="btn" tabindex="4">-</button>
+                <button type="button" class="btn btn-esc" id="btnEsc" tabindex="8" title="Очистить всё">C</button>
             </div>
             <div class="row">
-                <button class="btn" tabindex="5">*</button>
-                <button class="btn" tabindex="6">/</button>
-                <button class="btn" tabindex="9"
+                <button type="button" class="btn" tabindex="5">*</button>
+                <button type="button" class="btn" tabindex="6">/</button>
+                <button type="button" class="btn" tabindex="9"
                     title="Расчет пропорции: сколько процентов составляет второе число от первого (%=y*100/x)">%</button>
             </div>
             <div class="row row-result">
-                <button class="btn btnResult" id="btnResult" tabindex="7">=</button>
-                <button class="btnUpResult" id="btnUpResult"
+                <button type="button" class="btn btnResult" id="btnResult" tabindex="7">=</button>
+                <button type="button" class="btnUpResult" id="btnUpResult"
                     title="Использовать результат. Результат копируется в первую пустую строку, если строки заполнены - значение не переносится."
-                    tabindex="11">&#10548; 
+                    tabindex="11">&#10548;
                     <!-- &#11014; -->
                 </button>
-                <button class="btnChangeValue" id="btnChangeValue" title="Инверсия числа для результата вычисления"
-                    tabindex="10">±
+                <button type="button" class="btnChangeValue" id="btnChangeValue"
+                    title="Инверсия числа для результата вычисления" tabindex="10">±
                 </button>
             </div>
         </div>
