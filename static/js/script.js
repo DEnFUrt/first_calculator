@@ -46,18 +46,22 @@
     setFocusInput(inputFirstValue);
 
 
-    //Чистим первую строку ввода и обнуляем переменную с ней связанную при клике мышкой
+    //Чистим первую строку ввода если значение не цифра и обнуляем переменную с ней связанную при переводе фокуса
 
-    inputFirstValue.addEventListener('click', (e) => {
-        e.currentTarget.value = '';
-        firstValue = 0;
+    inputFirstValue.addEventListener('focus', (e) => {
+        if (e.currentTarget.value === errNumber) {
+            e.currentTarget.value = '';
+            firstValue = 0;
+        }
     });
 
-    //Чистим вторую строку ввода и обнуляем переменную с ней связанную при клике мышкой
+    //Чистим вторую строку ввода если значение не цифра и обнуляем переменную с ней связанную при переводе фокуса
 
-    inputSecondValue.addEventListener('click', (e) => {
-        e.currentTarget.value = '';
-        secondValue = 0;
+    inputSecondValue.addEventListener('focus', (e) => {
+        if (e.currentTarget.value === errNumber) {
+            e.currentTarget.value = '';
+            secondValue = 0;
+        }
     });
 
     /* проверяем строку ввода первого оператора после потери фокуса ввода, если не число, то сбрасываем значение на 0
@@ -88,11 +92,11 @@
         }
     });
 
-    //Считаем результат, вызываем функцию чистки строк ввода оператора, передаем фокус на первую строку ввода
+    //Считаем результат, вызываем функцию чистки строк ввода, операнда и передаем фокус на первую строку ввода
 
     btnResult.addEventListener('click', () => {
-        console.log(`onResult ${btnUpResult}`)
-        console.log(firstValue, secondValue, action);
+        // console.log(`onResult ${btnUpResult}`)
+        // console.log(firstValue, secondValue, action);
         if (inputFirstValue.value !== errNumber && inputSecondValue.value !== errNumber) {
             fieldResult.textContent = calculate(firstValue, secondValue, action);
             if (fieldResult.textContent !== errOperand) {
@@ -105,7 +109,7 @@
     //Если нажали кнопку С вызываем функцию чистки строки ввода и результата
 
     btnEsc.addEventListener('click', () => {
-        console.log(`onClear ${btnEsc}`)
+        // console.log(`onClear ${btnEsc}`)
         let clearResult = true;
         clearValue(clearResult);
         setFocusInput(inputFirstValue);
@@ -143,13 +147,22 @@
         }
     });
 
-    //Ставим фокус ввода на первую строку, если там не число то чистим строку ввода
+    //Ставим фокус ввода на строку переданную в параметре, если параметра нет, то ставим в свободную строку
+    //если все занято то в первую строку
 
     function setFocusInput(nameInput) {
-        if (nameInput.value === errNumber) {
-            nameInput.value = '';
+        if (nameInput) {
+            nameInput.focus();
+        } else {
+            if (inputFirstValue.value !== '' && inputSecondValue.value !== '') {
+                inputFirstValue.focus();
+            } else if (inputFirstValue.value !== '') {
+                inputSecondValue.focus();
+            } else {
+                inputFirstValue.focus();
+            }
         }
-        nameInput.focus();
+        
     }
 
     //Чистим строки ввода и переменные и экшен
@@ -179,13 +192,12 @@
                 }
             }
         });
-       // setFocusInput(inputSecondValue);
     }
 
-    // Функция парсит нажатие кнопки на клавиатуре и вызывает событие для кнопки на форме 
+    // Функция парсит нажатие кнопки на клавиатуре и вызывает событие focus для кнопки на форме 
 
     calculator.addEventListener('keydown', (e) => {
-        console.log(`keyDown ${e.key}`)
+        // console.log(`keyDown ${e.key}`)
         for (let keyCode in keyCodes) {
             if (e.key === keyCode) {
                 let x = controlsArray.find(x => x.textContent === keyCodes[keyCode]);
@@ -199,14 +211,16 @@
         
     });
 
+    // Функция парсит отжатие кнопки на клавиатуре и вызывает событие click для кнопки на форме
+
     calculator.addEventListener('keyup', (e) => {
-        console.log(`keyUp ${e}`)
+        // console.log(`keyUp ${e}`)
         for (let keyCode in keyCodes) {
             if (e.key === keyCode) {
                 let x = controlsArray.find(x => x.textContent === keyCodes[keyCode]);
                 if (x) {
                     x.click()
-                    setFocusInput(inputSecondValue);
+                    setFocusInput();
                 }
                 break;
             }
