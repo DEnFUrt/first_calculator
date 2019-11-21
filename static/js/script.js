@@ -101,33 +101,6 @@
         setFocusInputFirstValue();
     });
 
-     
-
-       // Функция парсит нажатие кнопки на клаиатуре и вызывает событие для кнопки на форме 
-
-    calculator.addEventListener('keydown', (e) => {
-        for (let keyCode in keyCodes) {
-            if (e.key === keyCode) {
-                let x = controlsArray.find(x => x.textContent === keyCodes[keyCode]);
-                
-                x.focus();
-           } 
-        }
-    });
-
-    calculator.addEventListener('keyup', (e) => {
-        for (let keyCode in keyCodes) {
-            if (e.key === keyCode) {
-                let x = controlsArray.find(x => x.textContent === keyCodes[keyCode]);
-                
-                x.click();
-           } 
-        }
-    });   
-
-    
-
-
     //Если нажали кнопку С вызываем функцию чистки строки ввода и результата
 
     btnEsc.addEventListener('click', () => {
@@ -205,6 +178,30 @@
             }
         });
     }
+
+       // Функция парсит нажатие кнопки на клаиатуре и вызывает событие для кнопки на форме 
+
+       calculator.addEventListener('keydown', (e) => {
+        for (let keyCode in keyCodes) {
+            if (e.key === keyCode) {
+                let x = controlsArray.find(x => x.textContent === keyCodes[keyCode]);
+                if (x) {x.focus()}
+                break;
+                
+           } 
+        }
+    });
+
+    calculator.addEventListener('keyup', (e) => {
+        for (let keyCode in keyCodes) {
+            if (e.key === keyCode) {
+                let x = controlsArray.find(x => x.textContent === keyCodes[keyCode]);
+                if (x) {x.click()}
+                break;
+                
+           } 
+        }
+    });   
 
     function calculate(x, y, action) {
         switch (action) {
