@@ -18,7 +18,7 @@
     const errNumber = 'не число!';
     const errOperand = 'нет операнда!';
 
-    //Библиотека соответствия кодов клавиатуры тексту на клавишах калькулятора 
+    //Словарь соответствия кодов клавиатуры тексту на клавишах калькулятора 
     const keyCodes = {
         'Enter': '=',
         'Escape': 'C',
@@ -28,7 +28,7 @@
         '-': '-',
     }
 
-    //Библиотека эмодзи для операндов
+    //Словарь эмодзи для операндов
     const operandSimbol = {
         '+': '✚',
         '-': '▬',
@@ -162,7 +162,7 @@
                 inputFirstValue.focus();
             }
         }
-        
+
     }
 
     //Чистим строки ввода и переменные и экшен
@@ -194,38 +194,52 @@
         });
     }
 
-    // Функция парсит нажатие кнопки на клавиатуре и вызывает событие focus для кнопки на форме 
+    // Функция парсит нажатие кнопки на клавиатуре в div calculator и вызывает событие focus для кнопки на форме 
 
     calculator.addEventListener('keydown', (e) => {
         // console.log(`keyDown ${e.key}`)
         for (let keyCode in keyCodes) {
             if (e.key === keyCode) {
-                let x = controlsArray.find(x => x.textContent === keyCodes[keyCode]);
-                if (x) {
-                    x.focus()
+                let btnCode = controlsArray.find(btnCode => btnCode.textContent === keyCodes[keyCode]);
+                if (btnCode) {
+                    btnCode.focus()
                 }
                 break;
-                
+
             }
         }
-        
+
     });
 
-    // Функция парсит отжатие кнопки на клавиатуре и вызывает событие click для кнопки на форме
+    // Функция парсит отжатие кнопки на клавиатуре в div calculator и вызывает событие click для кнопки на форме
 
     calculator.addEventListener('keyup', (e) => {
         // console.log(`keyUp ${e}`)
         for (let keyCode in keyCodes) {
             if (e.key === keyCode) {
-                let x = controlsArray.find(x => x.textContent === keyCodes[keyCode]);
-                if (x) {
-                    x.click()
+                let btnCode = controlsArray.find(btnCode => btnCode.textContent === keyCodes[keyCode]);
+                if (btnCode) {
+                    btnCode.click()
                     setFocusInput();
                 }
                 break;
             }
         }
     });
+
+    // //Парсим нажатие клавиш в инпутах и оставляем только цифры с точкой разделителем дробной части, 6 цифр после точки
+    // Это на будущее задел
+    // inputFirstValue.addEventListener('keyup', () => {
+    //     inputFirstValue.value = inputFirstValue.value.replace(/[^\-\d.-]*/g, '')
+    //         .replace(/([.])[.]+/g, '$1')
+    //         .replace(/^[^\d]*(\d+([.]\d{0,6})?).*$/g, '$1');
+    // });
+
+    // inputSecondValue.addEventListener('keyup', () => {
+    //     inputSecondValue.value = inputSecondValue.value.replace(/[^\d.]*/g, '')
+    //         .replace(/([.])[.]+/g, '$1')
+    //         .replace(/^[^\d]*(\d+([.]\d{0,6})?).*$/g, '$1');
+    // });
 
     function calculate(x, y, action) {
         switch (action) {
@@ -260,4 +274,4 @@
 })();
 
 
-// привязать нажатие кнопки ентер к = а ескейп на С
+//Переписать функцию calculate
