@@ -1,41 +1,5 @@
 (function () {
-    const controls = document.getElementsByClassName('btn');
-    const btnResult = document.getElementById('btnResult');
-    const btnEsc = document.getElementById('btnEsc');
-    const btnChangeValue = document.getElementById('btnChangeValue');
-    const btnUpResult = document.getElementById('btnUpResult');
-    const inputFirstValue = document.getElementById('firstValue');
-    const inputSecondValue = document.getElementById('secondValue');
-    const fieldResult = document.getElementById('result');
-    const txtOperand = document.getElementById('operand');
-    const calculator = document.getElementById('calculator');
-
-    const controlsArray = [...controls];
-
-
-    //Константы сообщений об ошибках
-    const errInfiniti = 'бесконечность';
-    const errNumber = 'не число!';
-    const errOperand = 'нет операнда!';
-
-    //Словарь соответствия кодов клавиатуры тексту на клавишах калькулятора 
-    const keyCodes = {
-        'Enter': '=',
-        'Escape': 'C',
-        '+': '+',
-        '/': '/',
-        '*': '*',
-        '-': '-',
-    }
-
-    //Словарь эмодзи для операндов
-    const operandSimbol = {
-        '+': '✚',
-        '-': '▬',
-        '*': '✖',
-        '/': '/',
-        '%': '%',
-    }
+    
 
     let firstValue = 0;
     let secondValue = 0;
@@ -240,6 +204,10 @@
     //         .replace(/([.])[.]+/g, '$1')
     //         .replace(/^[^\d]*(\d+([.]\d{0,6})?).*$/g, '$1');
     // });
+
+    
+
+    console.log (calculate_.division.result(10, 3));
 
     function calculate(x, y, action) {
         switch (action) {
