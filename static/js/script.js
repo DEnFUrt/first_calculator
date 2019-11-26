@@ -207,7 +207,7 @@
 
     
 
-    console.log (calculate_.division.result(10, 3));
+    console.log (calculate_.notOperand.result(10, 3));
 
     function calculate(x, y, action) {
         switch (action) {
