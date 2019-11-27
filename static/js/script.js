@@ -64,7 +64,7 @@
 
     let checkInputNaN = function (inputValue) {
         if(inputValue.length === 0 || !Number(inputValue)) {
-            
+                      
         } 
     };
 
