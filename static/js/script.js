@@ -1,5 +1,5 @@
 (function () {
-    
+
 
     let firstValue = 0;
     let secondValue = 0;
@@ -45,16 +45,28 @@
     /* проверяем строку ввода второго оператора после потери фокуса ввода, если не число, то сбрасываем значение на 0
     и выводим соответствующее сообщение */
 
-    inputSecondValue.addEventListener('change', (e) => {
-        if (e.currentTarget.value.length === 0 ||
-            (!Number(e.currentTarget.value) &&
-                e.currentTarget.value !== '0')) {
-            secondValue = 0;
-            e.currentTarget.value = errNumber;
-        } else {
-            secondValue = parseFloat(e.currentTarget.value);
-        }
+    // inputSecondValue.addEventListener('change', (e) => {
+    //     if (e.currentTarget.value.length === 0 ||
+    //         (!Number(e.currentTarget.value) &&
+    //             e.currentTarget.value !== '0')) {
+    //         secondValue = 0;
+    //         e.currentTarget.value = errNumber;
+    //     } else {
+    //         secondValue = parseFloat(e.currentTarget.value);
+    //     }
+    // });
+
+    inputSecondValue.addEventListener('input', (e) => {
+        checkInputNaN(e.currentTarget.value);
     });
+
+    // Проверка на валидность строки ввода, если не цифры, ставим красную рамку вокруг инпута
+
+    let checkInputNaN = function (inputValue) {
+        if(inputValue.length === 0 || !Number(inputValue)) {
+            
+        } 
+    };
 
     //Считаем результат, вызываем функцию чистки строк ввода, операнда и передаем фокус на первую строку ввода
 
@@ -205,9 +217,9 @@
     //         .replace(/^[^\d]*(\d+([.]\d{0,6})?).*$/g, '$1');
     // });
 
-    
 
-    console.log (calculate_.notOperand.result(10, 3));
+
+    console.log(calculate_.notOperand.result(10, 3));
 
     function calculate(x, y, action) {
         switch (action) {
