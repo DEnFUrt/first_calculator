@@ -9,6 +9,7 @@ const fieldResult = document.getElementById('result');
 const txtOperand = document.getElementById('operand');
 const calculator = document.getElementById('calculator');
 
+
 const controlsArray = [...controls];
 
 
@@ -16,6 +17,7 @@ const controlsArray = [...controls];
 const errInfiniti = 'бесконечность';
 const errNumber = 'не число!';
 const errOperand = 'нет операнда!';
+const errInput = 'errorValue'; //Наименование класса для input 
 
 //Словарь соответствия кодов клавиатуры тексту на клавишах калькулятора 
 const keyCodes = {
@@ -35,6 +37,8 @@ const operandSimbol = {
     '/': '/',
     '%': '%',
 }
+
+
 
 const calculate_ = {
     addition: {

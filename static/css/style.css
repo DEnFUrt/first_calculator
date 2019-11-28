@@ -56,7 +56,10 @@ h1 {
     transition: all .3s;
     box-shadow: inset 2px 2px 5px rgba(154, 147, 140, 0.5), 
     1px 1px 5px rgba(233, 230, 230, 0.884);
-    
+}
+
+.calculator__inputs .errorValue {
+    box-shadow: 0 0 10px 1px rgba(255, 0, 34, 0.356);
 }
 
 .calculator__inputs .calculator__inputs-operand {
@@ -122,7 +125,3 @@ h1 {
     color: rgba(117, 11, 11, 0.767);
 }
 
-.calculator__inputs input .errorValue {
-    box-shadow: inset 2px 2px 5px rgba(255, 0, 34, 0.356), 
-    1px 1px 5px rgba(233, 230, 230, 0.884);
-}
