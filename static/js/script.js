@@ -1,9 +1,7 @@
 (function () {
 
 
-    /* let firstValue = 0;
-    let secondValue = 0;
-    let action = ''; */
+    let action = '';
 
     /* проверяем строку ввода оператора, если введено не число, то ставим красную рамку
     вокруг строки ввода, если число - убираем */
@@ -53,6 +51,16 @@
 
     };
 
+    let setErrorFocusInput = function () {
+        if (inputFirstValue.classList.contains(errInput) && inputSecondValue.classList.contains(errInput)) {
+            inputFirstValue.focus();
+        } else if (!inputFirstValue.classList.contains(errInput)) {
+            inputSecondValue.focus();
+        } else {
+            inputFirstValue.focus();
+        } 
+    };
+
     //Чистим строки ввода 
 
     let clearInputValue = function (clearResult) {
@@ -64,7 +72,7 @@
         inputSecondValue.value = '';
         //secondValue = 0;
         txtOperand.textContent = '';
-        //action = '';
+        action = '';
     };
 
     //Определяем нажатую клавишу и находим соответствующую кнопку на блоке calculator
@@ -78,6 +86,25 @@
         }
     };
 
+    //Устанавливаем значения переменных калькулятора перед расчетом
+    
+    let getValue = function (inputTarget) {
+        let swap = 0;
+        if (-inputTarget.value) {
+            swap = parseFloat(inputTarget.value);
+        }
+        return swap;
+    };
+
+    let changeValue = function (targetElementText) {
+        if (targetElementText[0] === '-') {
+            targetElementText = targetElementText.replace('-', '');
+        }
+        else {
+            targetElementText = `-${targetElementText}`;
+        }
+        return targetElementText;
+    }
 
     //При загрузке страницы ставим фокус на первую строку ввода
 
@@ -112,14 +139,14 @@
     Если в строке результата не число, выходим из функции */
 
     btnChangeValue.addEventListener('click', () => {
+        if (inputFirstValue.focus) {
+            inputFirstValue.value = changeValue(inputFirstValue.value);
+            return;
+        }
         if (!-fieldResult.textContent) {
             return
         };
-        if (fieldResult.textContent[0] === '-') {
-            fieldResult.textContent = fieldResult.textContent.replace('-', '');
-        } else {
-            fieldResult.textContent = `-${fieldResult.textContent}`;
-        }
+        fieldResult.textContent = changeValue(fieldResult.textContent);
     });
 
 
@@ -142,19 +169,18 @@
     //Считаем результат, вызываем функцию чистки строк ввода, операнда и передаем фокус на первую строку ввода
 
     btnResult.addEventListener('click', () => {
-        // console.log(`onResult ${btnUpResult}`)
-
-        let firstValue = parseFloat(inputFirstValue.value);
-        let secondValue = parseFloat(inputSecondValue.value);
-
-        if (firstValue && secondValue) {
-            //нужно вставить ссылку на функцию которая считывает экшин
-            fieldResult.textContent = calculate(firstValue, secondValue, '+');
-            console.log(firstValue, secondValue, '');
-            if (fieldResult.textContent !== errOperand) {
-                clearInputValue();
+        if (inputFirstValue.classList.contains(errInput) ||
+            inputSecondValue.classList.contains(errInput)) {
+                setErrorFocusInput ();
+                return;
             }
-        } else console.log('wertyu');
+        let firstValue = getValue(inputFirstValue);
+        let secondValue = getValue(inputSecondValue);
+        fieldResult.textContent = calculate(firstValue, secondValue, action);
+        console.log(firstValue, secondValue, action);
+        if (fieldResult.textContent !== errOperand) {
+                clearInputValue();
+        }
         setFocusInput(inputFirstValue);
     });
 
@@ -162,10 +188,13 @@
 
     for (let i = 0; i < controls.length; i++) {
         const btn = controls[i];
+        //let action = '';
+        //console.log(`initial ${action}`);
         btn.addEventListener('click', (e) => {
             for (let key in operandSimbol) {
                 if (key === e.currentTarget.textContent) {
-                    let action = key;
+                    action = key;
+                    //console.log(`set - ${action}`);
                     txtOperand.textContent = operandSimbol[key];
                     setFocusInput();
                     break;
@@ -173,8 +202,6 @@
             }
         });
     }
-
-
 
     // Функция парсит нажатие кнопки на клавиатуре в div calculator и вызывает событие focus для кнопки на форме 
 
@@ -193,7 +220,7 @@
         // console.log(`keyUp ${e}`)
         let btnCode = getBtnCode(e.key);
         if (btnCode) {
-            btnCode.click()
+           btnCode.click();
             //setFocusInput();
         }
     });
@@ -245,6 +272,8 @@
         }
     }
 })();
+
+
 
 
 //Переписать функцию calculate
