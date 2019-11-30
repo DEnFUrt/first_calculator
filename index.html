@@ -29,18 +29,18 @@
         </form>
         <div class="calculator__keyboard">
             <div class="row">
-                <button type="button" class="btn" tabindex="3">+</button>
-                <button type="button" class="btn" tabindex="4">-</button>
-                <button type="button" class="btn btn-esc" id="btnEsc" tabindex="8" title="Очистить всё">C</button>
+                <button type="button" class="btn" tabindex="3" data-operand="+">+</button>
+                <button type="button" class="btn" tabindex="4" data-operand="-">-</button>
+                <button type="button" class="btn btn-esc" id="btnEsc" tabindex="8" title="Очистить всё" data-operand="Escape">C</button>
             </div>
             <div class="row">
-                <button type="button" class="btn" tabindex="5">*</button>
-                <button type="button" class="btn" tabindex="6">/</button>
-                <button type="button" class="btn" tabindex="9"
+                <button type="button" class="btn" tabindex="5" data-operand="*">*</button>
+                <button type="button" class="btn" tabindex="6" data-operand="/">/</button>
+                <button type="button" class="btn" tabindex="9" data-operand="%"
                     title="Расчет пропорции: сколько процентов составляет второе число от первого (%=y*100/x)">%</button>
             </div>
             <div class="row row-result">
-                <button type="button" class="btn btnResult" id="btnResult" tabindex="7">=</button>
+                <button type="button" class="btn btnResult" id="btnResult" tabindex="7" data-operand="Enter">=</button>
                 <button type="button" class="btnUpResult" id="btnUpResult"
                     title="Использовать результат. Результат копируется в первую пустую строку, если строки заполнены - значение не переносится."
                     tabindex="11">&#10548;

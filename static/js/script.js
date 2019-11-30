@@ -2,6 +2,7 @@
 
 
     let action = '';
+    let elementOnBlur = '';
 
     /* проверяем строку ввода оператора, если введено не число, то ставим красную рамку
     вокруг строки ввода, если число - убираем */
@@ -51,6 +52,9 @@
 
     };
 
+    /* Ставим фокус ввода на строку с ошибкой
+    если ошибки нет или во всех строках - то в первую строку */
+
     let setErrorFocusInput = function () {
         if (inputFirstValue.classList.contains(errInput) && inputSecondValue.classList.contains(errInput)) {
             inputFirstValue.focus();
@@ -77,13 +81,18 @@
 
     //Определяем нажатую клавишу и находим соответствующую кнопку на блоке calculator
 
+    // let getBtnCode = function (currentKey) {
+    //     for (let keyCode in keyCodes) {
+    //         if (currentKey === keyCode) {
+    //             let btnCode = controlsArray.find(btnCode => btnCode.getAttribute('data-operand') === keyCodes[keyCode]);
+    //             return btnCode;
+    //         }
+    //     }
+    // };
+
     let getBtnCode = function (currentKey) {
-        for (let keyCode in keyCodes) {
-            if (currentKey === keyCode) {
-                let btnCode = controlsArray.find(btnCode => btnCode.textContent === keyCodes[keyCode]);
-                return btnCode;
-            }
-        }
+        let btnCode = controlsArray.find(btnCode => btnCode.getAttribute('data-operand') === currentKey);
+        return btnCode;
     };
 
     //Устанавливаем значения переменных калькулятора перед расчетом
@@ -95,6 +104,8 @@
         }
         return swap;
     };
+
+    // Убираем или добавляем минус в начале строки
 
     let changeValue = function (targetElementText) {
         if (targetElementText[0] === '-') {
@@ -124,6 +135,29 @@
         checkInputValue(e.currentTarget);
     });
 
+    // при получении фокуса Input удаляем ссылку на Input
+
+    inputFirstValue.addEventListener('focus', (e) => {
+        elementOnBlur = '';
+        console.log('elementOnBlur');
+    });
+
+    inputSecondValue.addEventListener('focus', (e) => {
+        elementOnBlur = '';
+        console.log('elementOnBlur');
+    });
+    
+    // при потере фокуса Input запоминаем ссылку на на этот Input
+
+    inputFirstValue.addEventListener('blur', (e) => {
+        elementOnBlur = e.currentTarget;
+        console.log(elementOnBlur);
+    });
+
+    inputSecondValue.addEventListener('blur', (e) => {
+        elementOnBlur = e.currentTarget;
+        console.log(elementOnBlur);
+    });
 
 
     //Если нажали кнопку С вызываем функцию чистки строки ввода и результата
@@ -137,16 +171,20 @@
 
     /* Если нажата кнопка -/+ меняем знак результата
     Если в строке результата не число, выходим из функции */
+//Не доделал
 
     btnChangeValue.addEventListener('click', () => {
-        if (inputFirstValue.focus) {
-            inputFirstValue.value = changeValue(inputFirstValue.value);
+        if (-elementOnBlur.value) {
+            elementOnBlur.value = changeValue(elementOnBlur.value);
             return;
         }
-        if (!-fieldResult.textContent) {
-            return
-        };
-        fieldResult.textContent = changeValue(fieldResult.textContent);
+        // if (!-fieldResult.textContent) {
+        //     return
+        // };
+        if (-fieldResult.textContent) {
+            fieldResult.textContent = changeValue(fieldResult.textContent);
+        }
+        btnChangeValue.blur ();
     });
 
 
@@ -192,7 +230,7 @@
         //console.log(`initial ${action}`);
         btn.addEventListener('click', (e) => {
             for (let key in operandSimbol) {
-                if (key === e.currentTarget.textContent) {
+                if (key === e.currentTarget.getAttribute('data-operand')) {
                     action = key;
                     //console.log(`set - ${action}`);
                     txtOperand.textContent = operandSimbol[key];
@@ -220,7 +258,7 @@
         // console.log(`keyUp ${e}`)
         let btnCode = getBtnCode(e.key);
         if (btnCode) {
-           btnCode.click();
+            btnCode.click();
             //setFocusInput();
         }
     });
