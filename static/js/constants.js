@@ -20,14 +20,14 @@ const errOperand = 'нет операнда!';
 const errInput = 'errorValue'; //Наименование класса для input 
 
 //Словарь соответствия кодов клавиатуры тексту на клавишах калькулятора 
-const keyCodes = {
+/* const keyCodes = {
     'Enter': '=',
     'Escape': 'C',
     '+': '+',
     '/': '/',
     '*': '*',
     '-': '-',
-}
+} */
 
 //Словарь эмодзи для операндов
 const operandSimbol = {
