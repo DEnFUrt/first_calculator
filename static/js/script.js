@@ -69,7 +69,7 @@
 
     let clearInputValue = function (clearResult) {
         if (clearResult) {
-            inputResult.value = '0';
+            inputResultValue.value = '0';
         }
         inputFirstValue.value = '';
         inputSecondValue.value = '';
@@ -158,11 +158,11 @@
     Если в строке результата не число, выходим из функции  */
 
     btnUpResult.addEventListener('click', () => {
-        if (!-inputResult.value) {
+        if (!-inputResultValue.value) {
             focusedInput.focus();
             return
         };
-        focusedInput.value = inputResult.value;
+        focusedInput.value = inputResultValue.value;
         focusedInput.focus();
     });
 
@@ -176,9 +176,9 @@
         }
         let firstValue = getValue(inputFirstValue);
         let secondValue = getValue(inputSecondValue);
-        inputResult.value = calculate(firstValue, secondValue, action);
-        console.log(firstValue, secondValue, action);
-        if (inputResult.value !== errOperand) {
+        let calc = calculate.find(calc => calc.operand === action);
+        inputResultValue.value = calc.result(firstValue, secondValue);
+        if (inputResultValue.value !== errOperand) {
             clearInputValue();
         }
         setFocusInput(inputFirstValue);
@@ -186,26 +186,8 @@
 
     //Определяем какая кнопка операнда была нажата и выводим символ операнда в форму
 
-    // for (let i = 0; i < controls.length; i++) {
-    //     const btn = controls[i];
-    //     //let action = '';
-    //     //console.log(`initial ${action}`);
-    //     btn.addEventListener('click', (e) => {
-    //         for (let key in operandSimbol) {
-    //             if (key === e.currentTarget.getAttribute('data-operand')) {
-    //                 action = key;
-    //                 //console.log(`set - ${action}`);
-    //                 txtOperand.value = operandSimbol[key];
-    //                 setFocusInput();
-    //                 break;
-    //             }
-    //         }
-    //     });
-    // }
-
     calculator.addEventListener('click', (e) => {
         if (e.target.nodeName == 'BUTTON') {
-            //console.log('Clicked', e.target.getAttribute('data-operand'));
             for (let key in operandSimbol) {
                 if (key === e.target.getAttribute('data-operand')) {
                     action = key;
@@ -237,39 +219,4 @@
         }
     });
 
-    function calculate(x, y, action) {
-        switch (action) {
-            case '+':
-                return x + y;
-
-            case '-':
-                return x - y;
-
-            case '*':
-                let result = x * y;
-                return +result.toFixed(6);
-
-            case '/':
-                if (y !== 0) {
-                    let result = x / y;
-                    return +result.toFixed(6);
-                }
-                return errInfiniti;
-
-            case '%':
-                if (x !== 0) {
-                    let result = y * 100 / x;
-                    return +result.toFixed(6);
-                }
-                return errInfiniti;
-
-            default:
-                return errOperand;
-        }
-    }
-})();
-
-
-
-
-//Переписать функцию calculate
+})(); 

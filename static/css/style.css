@@ -97,7 +97,8 @@ h1 {
     1px 1px 5px rgba(233, 230, 230, 0.884); */
 }
 
-.calculator__result input:focus {
+.calculator__result input:focus,
+.calculator__result input:hover {
     color: rgba(117, 11, 11, 0.767);
 }
 
