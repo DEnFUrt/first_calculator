@@ -81,6 +81,26 @@ h1 {
     border-top: 3px solid rgb(189, 189, 189);
 }
 
+.calculator__result input {
+    font-family: 'Kelly Slab', monospace, serif;
+    padding: 5px;
+    border: none;
+    text-align: right;
+    font-size: 35px;
+    width: 250px;
+    background: rgba(233, 230, 230, 0.884);
+    color: #000000d8;
+    outline: none;
+    cursor: pointer;
+    /* transition: all .3s;
+    box-shadow: inset 2px 2px 5px rgba(154, 147, 140, 0.5), 
+    1px 1px 5px rgba(233, 230, 230, 0.884); */
+}
+
+.calculator__result input:focus {
+    color: rgba(117, 11, 11, 0.767);
+}
+
 .row {
     display: flex;
 }
@@ -121,7 +141,8 @@ h1 {
     color: rgba(117, 11, 11, 0.438);
 }
 
-.row .btn-esc:hover {
+.row .btn-esc:hover,
+.row .btn-esc:focus {
     color: rgba(117, 11, 11, 0.767);
 }
 

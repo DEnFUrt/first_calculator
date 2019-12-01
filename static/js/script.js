@@ -159,6 +159,7 @@
 
     btnUpResult.addEventListener('click', () => {
         if (!-inputResult.value) {
+            focusedInput.focus();
             return
         };
         focusedInput.value = inputResult.value;
@@ -204,7 +205,7 @@
 
     calculator.addEventListener('click', (e) => {
         if (e.target.nodeName == 'BUTTON') {
-            console.log('Clicked', e.target.getAttribute('data-operand'));
+            //console.log('Clicked', e.target.getAttribute('data-operand'));
             for (let key in operandSimbol) {
                 if (key === e.target.getAttribute('data-operand')) {
                     action = key;
@@ -235,22 +236,6 @@
             //setFocusInput();
         }
     });
-
-    // //Парсим нажатие клавиш в инпутах и оставляем только цифры с точкой разделителем дробной части, 6 цифр после точки
-    // Это на будущее задел
-    // inputFirstValue.addEventListener('keyup', () => {
-    //     inputFirstValue.value = inputFirstValue.value.replace(/[^\-\d.-]*/g, '')
-    //         .replace(/([.])[.]+/g, '$1')
-    //         .replace(/^[^\d]*(\d+([.]\d{0,6})?).*$/g, '$1');
-    // });
-
-    // inputSecondValue.addEventListener('keyup', () => {
-    //     inputSecondValue.value = inputSecondValue.value.replace(/[^\d.]*/g, '')
-    //         .replace(/([.])[.]+/g, '$1')
-    //         .replace(/^[^\d]*(\d+([.]\d{0,6})?).*$/g, '$1');
-    // });
-
-
 
     function calculate(x, y, action) {
         switch (action) {
