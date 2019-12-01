@@ -5,9 +5,10 @@ const btnChangeValue = document.getElementById('btnChangeValue');
 const btnUpResult = document.getElementById('btnUpResult');
 const inputFirstValue = document.getElementById('firstValue');
 const inputSecondValue = document.getElementById('secondValue');
-const fieldResult = document.getElementById('result');
+const inputResult = document.getElementById('resultValue');
 const txtOperand = document.getElementById('operand');
 const calculator = document.getElementById('calculator');
+const inputs = document.getElementsByTagName('input');
 
 
 const controlsArray = [...controls];
@@ -15,7 +16,7 @@ const controlsArray = [...controls];
 
 //Константы сообщений об ошибках
 const errInfiniti = 'бесконечность';
-const errNumber = 'не число!';
+//const errNumber = 'не число!';
 const errOperand = 'нет операнда!';
 const errInput = 'errorValue'; //Наименование класса для input 
 
