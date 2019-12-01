@@ -5,7 +5,7 @@ const btnChangeValue = document.getElementById('btnChangeValue');
 const btnUpResult = document.getElementById('btnUpResult');
 const inputFirstValue = document.getElementById('firstValue');
 const inputSecondValue = document.getElementById('secondValue');
-const inputResult = document.getElementById('resultValue');
+const inputResultValue = document.getElementById('resultValue');
 const txtOperand = document.getElementById('operand');
 const calculator = document.getElementById('calculator');
 const inputs = document.getElementsByTagName('input');
@@ -16,19 +16,8 @@ const controlsArray = [...controls];
 
 //Константы сообщений об ошибках
 const errInfiniti = 'бесконечность';
-//const errNumber = 'не число!';
 const errOperand = 'нет операнда!';
 const errInput = 'errorValue'; //Наименование класса для input 
-
-//Словарь соответствия кодов клавиатуры тексту на клавишах калькулятора 
-/* const keyCodes = {
-    'Enter': '=',
-    'Escape': 'C',
-    '+': '+',
-    '/': '/',
-    '*': '*',
-    '-': '-',
-} */
 
 //Словарь эмодзи для операндов
 const operandSimbol = {
@@ -39,24 +28,26 @@ const operandSimbol = {
     '%': '%',
 }
 
+// словарь функций калькулятора
 
-
-const calculate_ = {
-    addition: {
+const calculate = [
+    {
         operand: '+',
         result: (x, y) => {
-            return x + y
+            let tmp = x + y;
+            return +tmp.toFixed(6);
         },
     },
 
-    subtraction: {
+    {
         operand: '-',
         result: (x, y) => {
-            return x - y
+            let tmp = x - y;
+            return +tmp.toFixed(6);
         },
     },
 
-    multiplication: {
+    {
         operand: '*',
         result: (x, y) => {
             let tmp = x * y;
@@ -64,7 +55,7 @@ const calculate_ = {
         },
     },
 
-    division: {
+    {
         operand: '/',
         result: (x, y) => {
             if (y !== 0) {
@@ -75,7 +66,7 @@ const calculate_ = {
         },
     },
 
-    percent: {
+    {
         operand: '%',
         result: (x, y) => {
             if (x !== 0) {
@@ -86,10 +77,10 @@ const calculate_ = {
         },
     },
 
-    notOperand: {
+    {
         operand: '',
         result: (x, y) => {
             return errOperand;
         },
     },
-}
+]
