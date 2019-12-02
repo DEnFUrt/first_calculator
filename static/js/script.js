@@ -5,7 +5,8 @@
     let focusedInput;
 
     /* проверяем строку ввода оператора, если введено не число, то ставим красную рамку
-    вокруг строки ввода, если число - убираем */
+    вокруг строки ввода, если число - убираем 
+    */
 
     let checkInputValue = function (inputTarget) {
         if (!-inputTarget.value && -inputTarget.value !== 0) {
@@ -15,8 +16,7 @@
         }
     };
 
-    /* проверяем наличие класса errInput в элементе inputTarget формы и если класса
-    нет, ставим его*/
+    // проверяем наличие класса errInput в элементе inputTarget формы и если класса нет, ставим его
 
     let setOnErrorBorderInput = function (inputTarget) {
         if (!inputTarget.classList.contains(errInput)) {
@@ -24,8 +24,7 @@
         }
     };
 
-    /* проверяем наличие класса errInput в элементе inputTarget формы и если класс
-    есть, удаляем его */
+    // проверяем наличие класса errInput в элементе inputTarget формы и если класс есть, удаляем его 
 
     let setOffErrorBorderInput = function (inputTarget) {
         if (inputTarget.classList.contains(errInput)) {
@@ -35,7 +34,8 @@
 
 
     /* Ставим фокус ввода на строку переданную в параметре, если параметра нет, то ставим в свободную строку
-    если все занято то в первую строку */
+    - если все занято то в первую строку 
+    */
 
     let setFocusInput = function (inputTarget) {
         if (inputTarget) {
@@ -53,7 +53,8 @@
     };
 
     /* Ставим фокус ввода на строку с ошибкой
-    если ошибки нет или во всех строках - то в первую строку */
+    - если ошибки нет или во всех строках - то в первую строку 
+    */
 
     let setErrorFocusInput = function () {
         if (inputFirstValue.classList.contains(errInput) && inputSecondValue.classList.contains(errInput)) {
@@ -119,21 +120,17 @@
 
     setFocusInput(inputFirstValue);
 
-    /* проверяем строку ввода первого оператора, если не число, то рисуем
-    красную рамку вокруг строки ввода */
+    /* проверяем строку ввода, если не число, то рисуем
+    красную рамку вокруг строки ввода 
+    */
 
-    inputFirstValue.addEventListener('input', (e) => {
-        checkInputValue(e.currentTarget);
+    calculator.addEventListener('input', (e) => {
+        if (e.target.nodeName == 'INPUT') {
+            checkInputValue(e.target);
+        }
     });
 
-    /* проверяем строку ввода второго оператора, если не число, то рисуем
-    красную рамку вокруг строки ввода */
-
-    inputSecondValue.addEventListener('input', (e) => {
-        checkInputValue(e.currentTarget);
-    });
-
-    //Если нажали кнопку С вызываем функцию чистки строки ввода и результата
+    //Если нажали кнопку <С> вызываем функцию чистки строки ввода и результата
 
     btnEsc.addEventListener('click', () => {
         let clearResult = true;
@@ -142,8 +139,8 @@
     });
 
     /* Если нажата кнопка -/+ меняем знак результата
-    Если в строке результата не число, выходим из функции
-    оставляем фокус на строке */
+    - если в строке результата не число, выходим из функции оставляем фокус на строке 
+    */
     
 
     btnChangeValue.addEventListener('click', () => {
@@ -154,8 +151,9 @@
     });
 
     /* Если нажата кнопка стрелка вверх, то переносим результ вычисления в строку где фокус ввода
-    Если строки заняты - переписываем значение строки 
-    Если в строке результата не число, выходим из функции  */
+    - если строка занята - переписываем значение строки 
+    - если результат вычисления не число, выходим из функции 
+    */
 
     btnUpResult.addEventListener('click', () => {
         if (!-inputResultValue.value) {
@@ -166,7 +164,10 @@
         focusedInput.focus();
     });
 
-    //Считаем результат, вызываем функцию чистки строк ввода, операнда и передаем фокус на первую строку ввода
+    /* Считаем результат, вызываем функцию чистки строк ввода, операнда и передаем фокус на первую строку ввода
+    - если есть ошибки в строках ввода передаем фокус на строку с ошибкой, выходим из функции
+    - если перед расчетом не нажата кнопка операнда, выводим сообщение, строки ввода не чистим, фокус на первую строку ввода
+    */
 
     btnResult.addEventListener('click', () => {
         if (inputFirstValue.classList.contains(errInput) ||
@@ -208,14 +209,12 @@
         }
     });
 
-    /* Функция парсит отжатие кнопки на клавиатуре в div calculator и вызывает событие click для кнопки на форме
-     и переводит фокус на свободную строку ввода */
-
+    // Функция парсит отжатие кнопки на клавиатуре в div calculator и вызывает событие click для кнопки на форме
+    
     calculator.addEventListener('keyup', (e) => {
         let btnCode = getBtnCode(e.key);
         if (btnCode) {
             btnCode.click();
-            //setFocusInput();
         }
     });
 
