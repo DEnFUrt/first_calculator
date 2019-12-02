@@ -1,6 +1,13 @@
 body {
     margin: 0;
     padding: 0;
+    background: rgba(233, 230, 230, 0.884);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Kelly Slab', monospace, serif;
 }
 
 ul,
@@ -14,11 +21,18 @@ li {
     list-style-type: none;
 }
 
+h1 {
+    margin-left: -45%;
+    font-weight: 700;
+}
+
 .calculator {
     display: flex;
     align-items: center;
     margin: auto;
-    width: 400px;
+    width: 250px;
+    transform: translate(-50%, 0); 
+    
 }
 
 .calculator form {
@@ -30,29 +44,63 @@ li {
 }
 
 .calculator__inputs input {
-    border: none;
+    font-family: 'Kelly Slab', monospace, serif;
+    padding: 5px;
+    border-radius: 10px;
     text-align: right;
-    font-size: 40px;
+    font-size: 35px;
     width: 250px;
+    background: rgba(233, 230, 230, 0.884);
     color: #000000d8;
+    outline: none;
+    transition: all .3s;
+    box-shadow: inset 2px 2px 5px rgba(154, 147, 140, 0.5), 
+    1px 1px 5px rgba(233, 230, 230, 0.884);
+}
+
+.calculator__inputs .errorValue {
+    box-shadow: 0 0 10px 1px rgba(255, 0, 34, 0.356);
 }
 
 .calculator__inputs .calculator__inputs-operand {
     text-align: right; /* Выравниваем по правому краю */
-    /* float: left; */
     border: none;
     font-size: 14px;
-    width: 250px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding-right: 10px;
+    height: 14px;
 }
 
 .calculator__result {
-    font-size: 40px;
+    font-size: 35px;
     text-align: right;
-    padding-top: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding-right: 5px;
     border-top: 3px solid rgb(189, 189, 189);
 }
 
-.calculator__keyboard {}
+.calculator__result input {
+    font-family: 'Kelly Slab', monospace, serif;
+    padding: 5px;
+    border: none;
+    text-align: right;
+    font-size: 35px;
+    width: 250px;
+    background: rgba(233, 230, 230, 0.884);
+    color: #000000d8;
+    outline: none;
+    cursor: pointer;
+    /* transition: all .3s;
+    box-shadow: inset 2px 2px 5px rgba(154, 147, 140, 0.5), 
+    1px 1px 5px rgba(233, 230, 230, 0.884); */
+}
+
+.calculator__result input:focus,
+.calculator__result input:hover {
+    color: rgba(117, 11, 11, 0.767);
+}
 
 .row {
     display: flex;
@@ -69,21 +117,33 @@ li {
     outline: none;
     cursor: pointer;
     transition: all .3s;
+    box-shadow: 0 -3px rgb(82, 99, 90) inset;
+    
 }
 
 .row button:hover {
     transition: all .3s;
     color: rgb(41, 41, 41);
+    box-shadow: 0 3px rgb(82, 99, 90) inset;
 }
 
-.row-result .btnResult {
-    /* width: 65%; */
+.row button:focus {
+    transition: all .3s;
+    color: rgb(41, 41, 41);
+    box-shadow: 0 3px rgb(82, 99, 90) inset;
+}
+
+.row button:active {
+    background: rgba(41, 41, 41, 0.342);
+    box-shadow: 0 3px rgb(82, 99, 90) inset;
 }
 
 .row .btn-esc {
     color: rgba(117, 11, 11, 0.438);
 }
 
-.row .btn-esc:hover {
+.row .btn-esc:hover,
+.row .btn-esc:focus {
     color: rgba(117, 11, 11, 0.767);
 }
+

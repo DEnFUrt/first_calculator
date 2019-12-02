@@ -5,43 +5,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Kelly+Slab&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./static/css/style.css">
     <title>Мой первый калькулятор</title>
 </head>
 
 <body>
-    <div class="calculator">
+    <div>
+        <h1>ツ Калькулятор JS</h1>
+    </div>
+    <div class="calculator" id="calculator" onkeydown="if(event.keyCode==13){return false;}">
         <form>
             <div class="calculator__inputs">
                 <div>
-                    <input type="text" id="firstValue" placeholder="0">
+                    <input type="text" id="firstValue" placeholder="0" tabindex="1" autocomplete="off">
                 </div>
-                <div class="calculator__inputs-operand" id="operand">.</div>
+                <div class="calculator__inputs-operand" id="operand"></div>
                 <div>
-                    <input type="text" id="secondValue" placeholder="0">
+                    <input type="text" id="secondValue" placeholder="0" tabindex="2" autocomplete="off">
                 </div>
             </div>
-            <div id="result" class="calculator__result">0</div>
+            <div class="calculator__result">
+                <input type="text" id="resultValue" value="0" autocomplete="off" tabindex="10" readonly>
+            </div>
         </form>
         <div class="calculator__keyboard">
             <div class="row">
-                <button class="btn">+</button>
-                <button class="btn">-</button>
-                <button class="btn-esc" id="btnEsc">C</button>
+                <button type="button" class="btn" tabindex="3" data-operand="+">+</button>
+                <button type="button" class="btn" tabindex="4" data-operand="-">-</button>
+                <button type="button" class="btn btn-esc" id="btnEsc" tabindex="8" title="Очистить всё" data-operand="Escape">C</button>
             </div>
             <div class="row">
-                <button class="btn">*</button>
-                <button class="btn">/</button>
-                <button class="btn btnPercent" id="btnPercent">%</button>
+                <button type="button" class="btn" tabindex="5" data-operand="*">*</button>
+                <button type="button" class="btn" tabindex="6" data-operand="/">/</button>
+                <button type="button" class="btn" tabindex="9" data-operand="%"
+                    title="Расчет пропорции: сколько процентов составляет второе число от первого (%=y*100/x)">%</button>
             </div>
             <div class="row row-result">
-                <button class="btnResult" id="btnResult">=</button>
-                <button class="btnUpResult" id="btnUpResult" title="Использовать результат. При нажатии на кнопку результат копируется в первую пустую строку.">&#11014;</button>
-                <button class="btnChangeValue" id="btnChangeValue" title="Инверсия знака числа для результата вычисления">-/+</button>
+                <button type="button" class="btn btnResult" id="btnResult" tabindex="7" data-operand="Enter">=</button>
+                <button type="button" class="btnUpResult" id="btnUpResult"
+                    title="Результат вычисления копируется строку где поставлен курсор."
+                    tabindex="11">&#10548;
+                </button>
+                <button type="button" class="btnChangeValue" id="btnChangeValue"
+                    title="Инверсия числа в строке где установлен курсор" tabindex="10">±
+                </button>
             </div>
         </div>
     </div>
 </body>
+<script src="./static/js/constants.js"></script>
 <script src="./static/js/script.js"></script>
 
 </html>
