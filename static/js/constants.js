@@ -10,14 +10,16 @@ const txtOperand = document.getElementById('operand');
 const calculator = document.getElementById('calculator');
 const inputs = document.getElementsByTagName('input');
 
-
+// Создаем массив из HTMLCollection
 const controlsArray = [...controls];
 
 
 //Константы сообщений об ошибках
 const errInfiniti = 'бесконечность';
 const errOperand = 'нет операнда!';
-const errInput = 'errorValue'; //Наименование класса для input 
+
+//Константа наименования класса обозначающего ошибку валидации строки ввода для input 
+const errInput = 'errorValue'; 
 
 //Словарь эмодзи для операндов
 const operandSimbol = {
